@@ -9,7 +9,7 @@
  * 				 week, or -1 if the numAnimals or avgFood are less than 0 or non-numeric
  */
 function calculateFoodOrder(numAnimals, avgFood) {
-    if ( numAnimals >= 0 || avgFood >= 0 ) {
+    if ( numAnimals >= 0 && avgFood >= 0 ) {
         return numAnimals * avgFood;
     }
 }
@@ -23,17 +23,34 @@ function calculateFoodOrder(numAnimals, avgFood) {
  * @param week an array of Weekday objects
  * @return a string containing the name of the most popular day of the week if there is only one most popular day, and an array of the strings containing the names of the most popular days if there are more than one that are most popular
  */
-function mostPopularDays() {
-    let monday = new Weekday('Monday', 8);
-    let tuesday = new Weekday('Tuesday', 9);
-    let wednesday = new Weekday('Wednesday', 7);
-    let thursday = new Weekday('Thursday', 5);
-    let friday = new Weekday('Friday', 2);
-    let saturday = new Weekday('Saturday', 1);
+function mostPopularDays(week) {
+    let days = [];
+    let test = [];
+    let final = [];
+    let traffic = '';
+    for ( let i = 0; i < week.length; i++ ) {
+        let day = new Weekday(week[i], Math.floor((Math.random() * 10) + 1));
+        days.push(day);
+    }
 
-    
+    console.log(days);
 
-    return Monday;
+    for ( let k = 0; k < days.length; k++ ) {
+        test.push(days[k].traffic)
+        traffic = Math.max.apply(Math, test);
+    }
+    console.log(traffic);
+
+    for ( let j = 0; j < days.length; j++ ) {
+        if ( traffic == days[j].traffic ) {
+            final.push(days[j]);
+        }
+    }
+
+    console.log(final);
+
+
+    return test;
 }
 
 
