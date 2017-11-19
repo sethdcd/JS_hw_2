@@ -25,32 +25,33 @@ function calculateFoodOrder(numAnimals, avgFood) {
  */
 function mostPopularDays(week) {
     let days = [];
-    let test = [];
     let final = [];
-    let traffic = '';
+
+    // Create list of Weekday objects in an array
     for ( let i = 0; i < week.length; i++ ) {
-        let day = new Weekday(week[i], Math.floor((Math.random() * 10) + 1));
-        days.push(day);
+        let day = new Weekday(week[i], Math.floor((Math.random() * 4) + 1))
+        days.push( day );
     }
 
-    console.log(days);
-
+    // Find highest value and index point
+    let maxVal = 0;
+    let maxInt = 0;
     for ( let k = 0; k < days.length; k++ ) {
-        test.push(days[k].traffic)
-        traffic = Math.max.apply(Math, test);
-    }
-    console.log(traffic);
-
-    for ( let j = 0; j < days.length; j++ ) {
-        if ( traffic == days[j].traffic ) {
-            final.push(days[j]);
+        if ( days[k].traffic > maxVal ) {
+            maxVal = days[k].traffic;
+            maxInt = k;
         }
     }
 
-    console.log(final);
+    // Set highest values into a new array 
+    for ( let j = maxInt; j < days.length; j++ ) {
+        if ( days[j].traffic == maxVal ) {
+            final.push(days[j].name);
+        }
+    }
 
-
-    return test;
+    // Display differently depending on if multiple days    
+    return 'Day: ' + final;
 }
 
 
