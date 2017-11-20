@@ -45,7 +45,7 @@ function mostPopularDays(week) {
 
     // Set highest values into a new array 
     for ( let j = maxInt; j < days.length; j++ ) {
-        if ( days[j].traffic == maxVal ) {
+        if ( days[j].traffic === maxVal ) {
             final.push(days[j].name);
         }
     }
@@ -67,7 +67,28 @@ function mostPopularDays(week) {
  *         empty array if the array's lengths are unequal or zero, or if any array is null.
  */
 function createAnimalObjects(names, types, breeds) {
-    // IMPLEMENT THIS FUNCTION!
+    let barn = [];
+    let emptyBarn = ['empty array'];
+
+    // Get longest length of each array
+    let maxLength = Math.max(names.length,types.length,breeds.length);
+
+    if ( names.length !== maxLength || types.length  !== maxLength || breeds.length !== maxLength ) {            
+        return emptyBarn;            
+    }
+
+    for ( let i = 0; i < maxLength; i++ ) {
+        let animal = new Animal(names[i], types[i], breeds[i]);
+        barn.push(animal);
+    }
+
+    for ( j = 0; j < barn.length; j++ ) {
+        if ( !barn[j].name || !barn[j].type || !barn[j].breed ) {
+            return emptyBarn;
+        }
+    }
+
+    return barn;
 }
 
 /////////////////////////////////////////////////////////////////
@@ -98,7 +119,7 @@ function Item (name, barcode, sellingPrice, buyingPrice) {
   * A prototype to create Animal objects
   */
 function Animal (name, type, breed) {
-    this.name = name;
+     this.name = name;
      this.type = type;
      this.breed = breed;
 }
